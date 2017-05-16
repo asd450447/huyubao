@@ -11,6 +11,7 @@
 
 @interface ChartViewController ()
 
+
 @end
 
 @implementation ChartViewController
@@ -37,7 +38,7 @@
     NSString *timeEnd = [NSString stringWithFormat:@"%ld", (long)endTime];
     NSString *post = [NSString stringWithFormat:@"%@%@%@%@",@"Body=select,select * from huyubao where time between ",timeStart,@" and ",timeEnd];
     NSLog(@"post:%@", post);
-    [[AppDelegate instance]postToData:post];
+//    [[AppDelegate instance]postToData:post];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -109,37 +110,55 @@
         //首次进入控制器为竖屏时
         _height = SCREEN_HEIGHT - NAVIGATIONBAR_HEIGHT;
     }
-    self.lineChart = [[ZFLineChart alloc] initWithFrame:CGRectMake(0, 60, SCREEN_WIDTH, _height/2)];
+    self.lineChart = [[ZFLineChart alloc] initWithFrame:CGRectMake(0, 60, SCREEN_WIDTH, _height/2-20)];
     self.lineChart.dataSource = self;
     self.lineChart.delegate = self;
-    self.lineChart.topicLabel.text = @"温度曲线图";
-    self.lineChart.unit = @"℃";
-    self.lineChart.topicLabel.textColor = ZFPurple;
-    self.lineChart.isResetAxisLineMinValue = YES;
-    //    self.lineChart.isAnimated = NO;
-    //    self.lineChart.valueLabelPattern = kPopoverLabelPatternBlank;
-    self.lineChart.isShowXLineSeparate = YES;
+    self.lineChart.topicLabel.text = @"温度折线图";
+    self.lineChart.unit = @"°C";
+    self.lineChart.topicLabel.textColor = ZFBlack;
+        self.lineChart.isShowXLineSeparate = YES;
     self.lineChart.isShowYLineSeparate = YES;
-    self.lineChart.linePatternType = kLinePatternTypeForCurve;
+    //    self.lineChart.isAnimated = NO;
+    self.lineChart.isResetAxisLineMinValue = YES;
     //    self.lineChart.isShowAxisLineValue = NO;
-    //    lineChart.valueCenterToCircleCenterPadding = 0;
+    //    self.lineChart.isShadowForValueLabel = NO;
+//    self.lineChart.isShadow = NO;
+    //    self.lineChart.valueLabelPattern = kPopoverLabelPatternBlank;
+    //    self.lineChart.valueCenterToCircleCenterPadding = 0;
+    //    self.lineChart.separateColor = ZFYellow;
+    //    self.lineChart.linePatternType = kLinePatternTypeForCurve;
+    self.lineChart.unitColor = ZFBlack;
+//    self.lineChart.backgroundColor = ZFPurple;
+    self.lineChart.xAxisColor = ZFBlack;
+    self.lineChart.yAxisColor = ZFBlack;
+    self.lineChart.axisLineNameColor = ZFBlack;
+    self.lineChart.axisLineValueColor = ZFBlack;
+    self.lineChart.xLineNameLabelToXAxisLinePadding = 0;
     [self.view addSubview:self.lineChart];
     [self.lineChart strokePath];
     
-    self.lineChart2 = [[ZFLineChart alloc] initWithFrame:CGRectMake(0, _height/2+30, SCREEN_WIDTH, _height/2)];
+    self.lineChart2 = [[ZFLineChart alloc] initWithFrame:CGRectMake(0, _height/2+40, SCREEN_WIDTH, _height/2-20)];
     self.lineChart2.dataSource = self;
     self.lineChart2.delegate = self;
     self.lineChart2.topicLabel.text = @"溶解氧曲线图";
     //    self.lineChart2.unit = @"人";
-    self.lineChart2.topicLabel.textColor = ZFPurple;
+    self.lineChart2.topicLabel.textColor = ZFBlack;
     self.lineChart2.isResetAxisLineMinValue = YES;
     //    self.lineChart2.isAnimated = NO;
     //    self.lineChart2.valueLabelPattern = kPopoverLabelPatternBlank;
-    self.lineChart2.isShowXLineSeparate = YES;
     self.lineChart2.isShowYLineSeparate = YES;
-    self.lineChart2.linePatternType = kLinePatternTypeForCurve;
+    self.lineChart2.isShowXLineSeparate = YES;
+//    self.lineChart2.linePatternType = kLinePatternTypeForCurve;
     //    self.lineChart.isShowAxisLineValue = NO;
     //    lineChart.valueCenterToCircleCenterPadding = 0;
+    self.lineChart2.isShadow = NO;
+    self.lineChart2.unitColor = ZFBlack;
+//    self.lineChart2.backgroundColor = ZFWhite;
+    self.lineChart2.xAxisColor = ZFBlack;
+    self.lineChart2.yAxisColor = ZFBlack;
+    self.lineChart2.axisLineNameColor = ZFBlack;
+    self.lineChart2.axisLineValueColor = ZFBlack;
+    self.lineChart2.xLineNameLabelToXAxisLinePadding = 0;
     [self.view addSubview:self.lineChart2];
     [self.lineChart2 strokePath];
 }
@@ -147,24 +166,27 @@
 #pragma mark - ZFGenericChartDataSource
 
 - (NSArray *)valueArrayInGenericChart:(ZFGenericChart *)chart{
-    return @[@"123", @"256", @"-157", @"350", @"490", @"236"];
+    return @[@[@"-52", @"300", @"490", @"380", @"167", @"451",@"380", @"200", @"326", @"240", @"-258", @"137",@"256", @"300", @"-89", @"430", @"256", @"256",@"256", @"300", @"-89", @"430", @"256", @"256"]
+//             @[@"380", @"200", @"326", @"240", @"-258", @"137"],
+//             @[@"256", @"300", @"-89", @"430", @"256", @"256"]
+             ];
 }
 
 - (NSArray *)nameArrayInGenericChart:(ZFGenericChart *)chart{
-    return @[@"一年级", @"二年级", @"三年级", @"四年级", @"五年级", @"六年级"];
+    return @[@"00:00",@"01:00",@"02:00",@"03:00",@"04:00",@"05:00",@"06:00",@"07:00",@"08:00",@"09:00",@"10:00",@"11:00",@"12:00",@"13:00",@"14:00",@"15:00",@"16:00",@"17:00",@"18:00",@"19:00",@"20:00",@"21:00",@"22:00",@"23:00",@"24:00"];
 }
 
 - (NSArray *)colorArrayInGenericChart:(ZFGenericChart *)chart{
-    return @[ZFSkyBlue];
+    return @[ZFSkyBlue,ZFOrange,ZFMagenta];
 }
 
 - (CGFloat)axisLineMaxValueInGenericChart:(ZFGenericChart *)chart{
     return 500;
 }
 
-- (CGFloat)axisLineMinValueInGenericChart:(ZFGenericChart *)chart{
-    return -200;
-}
+//- (CGFloat)axisLineMinValueInGenericChart:(ZFGenericChart *)chart{
+//    return -200;
+//}
 
 - (NSUInteger)axisLineSectionCountInGenericChart:(ZFGenericChart *)chart{
     return 10;
