@@ -7,20 +7,19 @@
 //
 
 #import <UIKit/UIKit.h>
-#import <XMPPFramework/XMPPFramework.h>
+//#import <XMPPFramework/XMPPFramework.h>
 #import "AFNetworking.h"
 
-@interface AppDelegate : UIResponder <UIApplicationDelegate,XMPPRosterDelegate>
-
+@interface AppDelegate : UIResponder <UIApplicationDelegate>
 @property (strong, nonatomic) UIWindow *window;
-@property (strong, nonatomic) XMPPStream *xmppStream;
-@property (strong, nonatomic) XMPPReconnect *xmppReconnect;
+//@property (strong, nonatomic) XMPPStream *xmppStream;
+//@property (strong, nonatomic) XMPPReconnect *xmppReconnect;
 
 +(AppDelegate *)instance;
--(void)connectToHost;
--(void)disconnect;
--(void)sendMessage:(NSString*) mes Mac:(NSString *)whichMac;
--(void)postToData:(NSString *)post;
+//-(void)connectToHost;
+//-(void)disconnect;
+//-(void)sendMessage:(NSString*) mes Mac:(NSString *)whichMac;
+-(void)postToData:(NSString *)post postToDate:(NSString *)date;
 
 @end
 

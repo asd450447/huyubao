@@ -7,8 +7,16 @@
 //
 
 #import "ViewController.h"
+#import "LDProgressView.h"
+#import "GCDAsyncSocket.h"
 
-@interface ViewController ()
+@interface ViewController (){
+    GCDAsyncSocket *_socket;
+    NSInputStream *_inputStream;
+    NSOutputStream *_outputStream;
+    NSMutableArray *_msgArray;
+}
+
 
 @end
 
@@ -103,5 +111,135 @@
     NSData *data = [str dataUsingEncoding:NSUTF8StringEncoding];
     [outputStream write:data.bytes maxLength:data.length];
 }
+
+-(void)connectHost:(NSString *)host connectPort:(UInt32)port{
+    //创建GCDAsyncSocket
+    _socket = [[GCDAsyncSocket alloc] initWithDelegate:self delegateQueue:dispatch_get_main_queue()];
+    NSError *error = nil;
+    [_socket connectToHost:host onPort:port error:&error];
+    if (error != nil) {
+        NSLog(@"%@",error);
+    }
+}
+
+#pragma mark socket delegate
+-(void)socket:(GCDAsyncSocket *)sock didConnectToHost:(NSString *)host port:(uint16_t)port{
+    NSLog(@"didConneetToHost:%s",__func__);
+}
+
+-(void)socketDidDisconnect:(GCDAsyncSocket *)sock withError:(NSError *)err{
+    NSLog(@"连接失败或已断开:%@",err);
+}
+
+-(void)socket:(GCDAsyncSocket *)sock didWriteDataWithTag:(long)tag{
+    //    NSLog(@"didWriteDataWithTag%s",__func__);
+    [_socket readDataWithTimeout:-1 tag:tag];
+    
+}
+
+-(void)socket:(GCDAsyncSocket *)sock didReadData:(NSData *)data withTag:(long)tag{
+    //    NSLog(@"didReadData:%s",__func__);
+    [sock readDataWithTimeout:-1 tag:200];
+    NSString *receiverStr = [[NSString alloc] initWithData:[self replaceNoUtf8:data] encoding:NSUTF8StringEncoding];
+    NSLog(@"%@",receiverStr);
+    
+}
+
+#pragma mark 读取数据
+-(void)readData{
+    uint8_t buff[1024];
+    
+    NSInteger len = [_inputStream read:buff maxLength:sizeof(buff)];
+    NSMutableData *input = [[NSMutableData alloc] init];
+    [input appendBytes:buff length:len];
+    NSString *resultstring = [[NSString alloc]initWithData:input encoding:NSUTF8StringEncoding];
+    NSLog(@"%@",resultstring);
+    [_msgArray addObject:resultstring];
+    //    [_tableView1 reloadData];
+    
+}
+
+#pragma mark send 按钮
+- (void)sendMassageBtuClick:(NSString *)msg{
+    
+    //    NSString *msg = @"getdatabyjl";
+    [_socket writeData:[msg dataUsingEncoding:NSUTF8StringEncoding] withTimeout:-1 tag:102];
+    
+    [self.view endEditing:YES];
+    
+}
+
+
+#pragma mark 发送的封装方法
+-(void)sendMassage:(NSString *)msg{
+    NSData *buff = [msg dataUsingEncoding:NSUTF8StringEncoding];
+    
+    [_outputStream write:buff.bytes maxLength:buff.length];
+}
+
+
+//丢弃无用的ascii码
+- (NSData *)replaceNoUtf8:(NSData *)data
+{
+    char aa[] = {'A','A','A','A','A','A'};                      //utf8最多6个字符，当前方法未使用
+    NSMutableData *md = [NSMutableData dataWithData:data];
+    int loc = 0;
+    while(loc < [md length])
+    {
+        char buffer;
+        [md getBytes:&buffer range:NSMakeRange(loc, 1)];
+        if((buffer & 0x80) == 0)
+        {
+            loc++;
+            continue;
+        }
+        else if((buffer & 0xE0) == 0xC0)
+        {
+            loc++;
+            [md getBytes:&buffer range:NSMakeRange(loc, 1)];
+            if((buffer & 0xC0) == 0x80)
+            {
+                loc++;
+                continue;
+            }
+            loc--;
+            //非法字符，将这个字符（一个byte）替换为A
+            [md replaceBytesInRange:NSMakeRange(loc, 1) withBytes:aa length:1];
+            loc++;
+            continue;
+        }
+        else if((buffer & 0xF0) == 0xE0)
+        {
+            loc++;
+            [md getBytes:&buffer range:NSMakeRange(loc, 1)];
+            if((buffer & 0xC0) == 0x80)
+            {
+                loc++;
+                [md getBytes:&buffer range:NSMakeRange(loc, 1)];
+                if((buffer & 0xC0) == 0x80)
+                {
+                    loc++;
+                    continue;
+                }
+                loc--;
+            }
+            loc--;
+            //非法字符，将这个字符（一个byte）替换为A
+            [md replaceBytesInRange:NSMakeRange(loc, 1) withBytes:aa length:1];
+            loc++;
+            continue;
+        }
+        else
+        {
+            //非法字符，将这个字符（一个byte）替换为A
+            [md replaceBytesInRange:NSMakeRange(loc, 1) withBytes:aa length:1];
+            loc++;
+            continue;
+        }
+    }
+    
+    return md;
+}
+
 
 @end

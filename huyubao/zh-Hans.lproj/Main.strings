@@ -1,0 +1,48 @@
+
+/* Class = "UIButton"; normalTitle = "选择日期"; ObjectID = "2ZQ-Ih-7RZ"; */
+"2ZQ-Ih-7RZ.normalTitle" = "选择日期";
+
+/* Class = "UIButton"; normalTitle = "增氧机：关"; ObjectID = "3zq-HG-f1q"; */
+"3zq-HG-f1q.normalTitle" = "增氧机：关";
+
+/* Class = "UILabel"; text = "名字"; ObjectID = "55J-xF-kyn"; */
+"55J-xF-kyn.text" = "名字";
+
+/* Class = "UILabel"; text = "溶氧："; ObjectID = "Adh-eR-bgL"; */
+"Adh-eR-bgL.text" = "溶氧：";
+
+/* Class = "UILabel"; text = "温度："; ObjectID = "Chv-T0-roA"; */
+"Chv-T0-roA.text" = "温度：";
+
+/* Class = "UILabel"; text = "晴"; ObjectID = "CtQ-Cm-eQB"; */
+"CtQ-Cm-eQB.text" = "晴";
+
+/* Class = "UILabel"; text = "时间"; ObjectID = "H66-e7-kNR"; */
+"H66-e7-kNR.text" = "时间";
+
+/* Class = "UILabel"; text = "镇江"; ObjectID = "HXu-er-6xh"; */
+"HXu-er-6xh.text" = "镇江";
+
+/* Class = "UILabel"; text = "24"; ObjectID = "R6s-3T-8JI"; */
+"R6s-3T-8JI.text" = "24";
+
+/* Class = "UILabel"; text = "溶氧"; ObjectID = "Upq-cT-Uy0"; */
+"Upq-cT-Uy0.text" = "溶氧";
+
+/* Class = "UIButton"; normalTitle = "昨天"; ObjectID = "bVS-sd-5Qc"; */
+"bVS-sd-5Qc.normalTitle" = "昨天";
+
+/* Class = "UIButton"; normalTitle = "一周之内"; ObjectID = "f5i-fC-qED"; */
+"f5i-fC-qED.normalTitle" = "一周之内";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "nxX-xx-IrA"; */
+"nxX-xx-IrA.normalTitle" = "Button";
+
+/* Class = "UINavigationItem"; title = "护渔宝设备"; ObjectID = "o1g-yN-y0d"; */
+"o1g-yN-y0d.title" = "护渔宝设备";
+
+/* Class = "UILabel"; text = "温度"; ObjectID = "peC-u4-kyP"; */
+"peC-u4-kyP.text" = "温度";
+
+/* Class = "UIButton"; normalTitle = "校正"; ObjectID = "wBl-O0-bVo"; */
+"wBl-O0-bVo.normalTitle" = "校正";

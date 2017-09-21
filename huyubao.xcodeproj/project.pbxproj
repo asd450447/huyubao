@@ -7,9 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		3A7757671EA8E20A00FCA2BC /* LDProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A7757631EA8E20A00FCA2BC /* LDProgressView.m */; };
-		3A7757681EA8E20A00FCA2BC /* LDProgressView.podspec.json in Resources */ = {isa = PBXBuildFile; fileRef = 3A7757641EA8E20A00FCA2BC /* LDProgressView.podspec.json */; };
-		3A7757691EA8E20A00FCA2BC /* UIColor+RGBValues.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A7757661EA8E20A00FCA2BC /* UIColor+RGBValues.m */; };
 		3A77576C1EAB269D00FCA2BC /* ChartViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A77576B1EAB269D00FCA2BC /* ChartViewController.m */; };
 		3A7757C11EAB373000FCA2BC /* NSNumber+Zirkfied.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A7757711EAB373000FCA2BC /* NSNumber+Zirkfied.m */; };
 		3A7757C21EAB373000FCA2BC /* NSString+Zirkfied.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A7757731EAB373000FCA2BC /* NSString+Zirkfied.m */; };
@@ -53,16 +50,24 @@
 		3AC5200E1EA765470004C566 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3AC5200C1EA765470004C566 /* LaunchScreen.storyboard */; };
 		3AC520171EA8DA180004C566 /* DevTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AC520161EA8DA180004C566 /* DevTableViewController.m */; };
 		3AC5201B1EA8DB0B0004C566 /* DevTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AC5201A1EA8DB0B0004C566 /* DevTableViewCell.m */; };
+		B96996FB1F6FA0F30020DEBF /* TableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B96996FA1F6FA0F30020DEBF /* TableViewCell.m */; };
+		B96996FE1F6FA1210020DEBF /* TableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B96996FD1F6FA1210020DEBF /* TableViewController.m */; };
+		B96997011F6FAB930020DEBF /* DetialViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B96997001F6FAB930020DEBF /* DetialViewController.m */; };
+		B96997041F70F91A0020DEBF /* TimeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B96997031F70F91A0020DEBF /* TimeViewController.m */; };
+		B969970B1F726A740020DEBF /* AddFinshViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B96997061F726A740020DEBF /* AddFinshViewController.m */; };
+		B969970C1F726A740020DEBF /* AddFirstViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B96997081F726A740020DEBF /* AddFirstViewController.m */; };
+		B969970D1F726A740020DEBF /* AddWifiViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B969970A1F726A740020DEBF /* AddWifiViewController.m */; };
+		B96997131F726AE30020DEBF /* libsmartlinklib_7x.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B96997111F726AE30020DEBF /* libsmartlinklib_7x.a */; };
+		B96997161F726B380020DEBF /* postToData.m in Sources */ = {isa = PBXBuildFile; fileRef = B96997151F726B380020DEBF /* postToData.m */; };
+		B96997191F726D070020DEBF /* AutoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B96997181F726D070020DEBF /* AutoViewController.m */; };
+		B9F5DB271F4C2197007BD788 /* openfileRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = B9F5DB261F4C2197007BD788 /* openfileRequest.m */; };
 		ECE7EA4980774E3A672FD99E /* Pods_huyubao.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F789C33FEE4A63BD330645A /* Pods_huyubao.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		3A7757611EA8E20A00FCA2BC /* LDProgressView-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "LDProgressView-Prefix.pch"; sourceTree = "<group>"; };
-		3A7757621EA8E20A00FCA2BC /* LDProgressView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LDProgressView.h; sourceTree = "<group>"; };
-		3A7757631EA8E20A00FCA2BC /* LDProgressView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LDProgressView.m; sourceTree = "<group>"; };
-		3A7757641EA8E20A00FCA2BC /* LDProgressView.podspec.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = LDProgressView.podspec.json; sourceTree = "<group>"; };
-		3A7757651EA8E20A00FCA2BC /* UIColor+RGBValues.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+RGBValues.h"; sourceTree = "<group>"; };
-		3A7757661EA8E20A00FCA2BC /* UIColor+RGBValues.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+RGBValues.m"; sourceTree = "<group>"; };
+		3A26DE6F1ED3DF4D00CCA4C1 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
+		3A26DE701ED3DF4D00CCA4C1 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
+		3A4DD47E1F2F399100967FA3 /* CocoaAsyncSocket.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CocoaAsyncSocket.framework; path = "../../../Library/Developer/Xcode/DerivedData/huyubao-cppiisapbnxkhicbwxbblhpthbme/Build/Products/Debug-iphonesimulator/CocoaAsyncSocket/CocoaAsyncSocket.framework"; sourceTree = "<group>"; };
 		3A77576A1EAB269D00FCA2BC /* ChartViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChartViewController.h; sourceTree = "<group>"; };
 		3A77576B1EAB269D00FCA2BC /* ChartViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChartViewController.m; sourceTree = "<group>"; };
 		3A7757701EAB373000FCA2BC /* NSNumber+Zirkfied.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSNumber+Zirkfied.h"; sourceTree = "<group>"; };
@@ -150,6 +155,30 @@
 		3AC5201A1EA8DB0B0004C566 /* DevTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DevTableViewCell.m; sourceTree = "<group>"; };
 		4605DD5AA219832B2A901AED /* Pods-huyubao.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-huyubao.debug.xcconfig"; path = "Pods/Target Support Files/Pods-huyubao/Pods-huyubao.debug.xcconfig"; sourceTree = "<group>"; };
 		9F789C33FEE4A63BD330645A /* Pods_huyubao.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_huyubao.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		B96996F91F6FA0F30020DEBF /* TableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TableViewCell.h; sourceTree = "<group>"; };
+		B96996FA1F6FA0F30020DEBF /* TableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TableViewCell.m; sourceTree = "<group>"; };
+		B96996FC1F6FA1210020DEBF /* TableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TableViewController.h; sourceTree = "<group>"; };
+		B96996FD1F6FA1210020DEBF /* TableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TableViewController.m; sourceTree = "<group>"; };
+		B96996FF1F6FAB930020DEBF /* DetialViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetialViewController.h; sourceTree = "<group>"; };
+		B96997001F6FAB930020DEBF /* DetialViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetialViewController.m; sourceTree = "<group>"; };
+		B96997021F70F91A0020DEBF /* TimeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimeViewController.h; sourceTree = "<group>"; };
+		B96997031F70F91A0020DEBF /* TimeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TimeViewController.m; sourceTree = "<group>"; };
+		B96997051F726A740020DEBF /* AddFinshViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddFinshViewController.h; sourceTree = "<group>"; };
+		B96997061F726A740020DEBF /* AddFinshViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddFinshViewController.m; sourceTree = "<group>"; };
+		B96997071F726A740020DEBF /* AddFirstViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddFirstViewController.h; sourceTree = "<group>"; };
+		B96997081F726A740020DEBF /* AddFirstViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddFirstViewController.m; sourceTree = "<group>"; };
+		B96997091F726A740020DEBF /* AddWifiViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddWifiViewController.h; sourceTree = "<group>"; };
+		B969970A1F726A740020DEBF /* AddWifiViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddWifiViewController.m; sourceTree = "<group>"; };
+		B969970F1F726AE30020DEBF /* HFSmartLink.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HFSmartLink.h; sourceTree = "<group>"; };
+		B96997101F726AE30020DEBF /* HFSmartLinkDeviceInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HFSmartLinkDeviceInfo.h; sourceTree = "<group>"; };
+		B96997111F726AE30020DEBF /* libsmartlinklib_7x.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libsmartlinklib_7x.a; sourceTree = "<group>"; };
+		B96997121F726AE30020DEBF /* smartlinklib_7x.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = smartlinklib_7x.h; sourceTree = "<group>"; };
+		B96997141F726B380020DEBF /* postToData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = postToData.h; sourceTree = "<group>"; };
+		B96997151F726B380020DEBF /* postToData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = postToData.m; sourceTree = "<group>"; };
+		B96997171F726D070020DEBF /* AutoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AutoViewController.h; sourceTree = "<group>"; };
+		B96997181F726D070020DEBF /* AutoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AutoViewController.m; sourceTree = "<group>"; };
+		B9F5DB251F4C2197007BD788 /* openfileRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = openfileRequest.h; sourceTree = "<group>"; };
+		B9F5DB261F4C2197007BD788 /* openfileRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = openfileRequest.m; sourceTree = "<group>"; };
 		FBFC4601551BBD43AEFDFEDF /* Pods-huyubao.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-huyubao.release.xcconfig"; path = "Pods/Target Support Files/Pods-huyubao/Pods-huyubao.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -158,6 +187,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B96997131F726AE30020DEBF /* libsmartlinklib_7x.a in Frameworks */,
 				ECE7EA4980774E3A672FD99E /* Pods_huyubao.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -391,13 +421,12 @@
 		3AC51FFE1EA765470004C566 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				B96997141F726B380020DEBF /* postToData.h */,
+				B96997151F726B380020DEBF /* postToData.m */,
+				B969970E1F726AB60020DEBF /* 汉枫 */,
+				B9F5DB251F4C2197007BD788 /* openfileRequest.h */,
+				B9F5DB261F4C2197007BD788 /* openfileRequest.m */,
 				3A77576E1EAB373000FCA2BC /* ZFChart */,
-				3A7757611EA8E20A00FCA2BC /* LDProgressView-Prefix.pch */,
-				3A7757621EA8E20A00FCA2BC /* LDProgressView.h */,
-				3A7757631EA8E20A00FCA2BC /* LDProgressView.m */,
-				3A7757641EA8E20A00FCA2BC /* LDProgressView.podspec.json */,
-				3A7757651EA8E20A00FCA2BC /* UIColor+RGBValues.h */,
-				3A7757661EA8E20A00FCA2BC /* UIColor+RGBValues.m */,
 				3AC51FFF1EA765470004C566 /* main.m */,
 			);
 			name = "Supporting Files";
@@ -406,12 +435,28 @@
 		3AC520181EA8DA4B0004C566 /* ControllerView */ = {
 			isa = PBXGroup;
 			children = (
+				B96997171F726D070020DEBF /* AutoViewController.h */,
+				B96997181F726D070020DEBF /* AutoViewController.m */,
+				B96997051F726A740020DEBF /* AddFinshViewController.h */,
+				B96997061F726A740020DEBF /* AddFinshViewController.m */,
+				B96997071F726A740020DEBF /* AddFirstViewController.h */,
+				B96997081F726A740020DEBF /* AddFirstViewController.m */,
+				B96997091F726A740020DEBF /* AddWifiViewController.h */,
+				B969970A1F726A740020DEBF /* AddWifiViewController.m */,
 				3AC520151EA8DA180004C566 /* DevTableViewController.h */,
 				3AC520161EA8DA180004C566 /* DevTableViewController.m */,
 				3AC520191EA8DB0B0004C566 /* DevTableViewCell.h */,
 				3AC5201A1EA8DB0B0004C566 /* DevTableViewCell.m */,
 				3A77576A1EAB269D00FCA2BC /* ChartViewController.h */,
 				3A77576B1EAB269D00FCA2BC /* ChartViewController.m */,
+				B96996F91F6FA0F30020DEBF /* TableViewCell.h */,
+				B96996FA1F6FA0F30020DEBF /* TableViewCell.m */,
+				B96996FC1F6FA1210020DEBF /* TableViewController.h */,
+				B96996FD1F6FA1210020DEBF /* TableViewController.m */,
+				B96996FF1F6FAB930020DEBF /* DetialViewController.h */,
+				B96997001F6FAB930020DEBF /* DetialViewController.m */,
+				B96997021F70F91A0020DEBF /* TimeViewController.h */,
+				B96997031F70F91A0020DEBF /* TimeViewController.m */,
 			);
 			name = ControllerView;
 			sourceTree = "<group>";
@@ -425,9 +470,21 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		B969970E1F726AB60020DEBF /* 汉枫 */ = {
+			isa = PBXGroup;
+			children = (
+				B969970F1F726AE30020DEBF /* HFSmartLink.h */,
+				B96997101F726AE30020DEBF /* HFSmartLinkDeviceInfo.h */,
+				B96997111F726AE30020DEBF /* libsmartlinklib_7x.a */,
+				B96997121F726AE30020DEBF /* smartlinklib_7x.h */,
+			);
+			name = "汉枫";
+			sourceTree = "<group>";
+		};
 		DCE17B38602D2055BF261535 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				3A4DD47E1F2F399100967FA3 /* CocoaAsyncSocket.framework */,
 				9F789C33FEE4A63BD330645A /* Pods_huyubao.framework */,
 			);
 			name = Frameworks;
@@ -500,7 +557,6 @@
 				3AC5200E1EA765470004C566 /* LaunchScreen.storyboard in Resources */,
 				3AC5200B1EA765470004C566 /* Assets.xcassets in Resources */,
 				3AC520091EA765470004C566 /* Main.storyboard in Resources */,
-				3A7757681EA8E20A00FCA2BC /* LDProgressView.podspec.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -513,13 +569,16 @@
 			files = (
 			);
 			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
 			);
 			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-huyubao-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 		C1124C095D7F6E5A12CB4D97 /* [CP] Embed Pods Frameworks */ = {
@@ -528,9 +587,28 @@
 			files = (
 			);
 			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-huyubao/Pods-huyubao-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/AFNetworking/AFNetworking.framework",
+				"${BUILT_PRODUCTS_DIR}/ActionSheetPicker-3.0/ActionSheetPicker_3_0.framework",
+				"${BUILT_PRODUCTS_DIR}/CocoaAsyncSocket/CocoaAsyncSocket.framework",
+				"${BUILT_PRODUCTS_DIR}/CocoaLumberjack/CocoaLumberjack.framework",
+				"${BUILT_PRODUCTS_DIR}/KeyboardToolBar/KeyboardToolBar.framework",
+				"${BUILT_PRODUCTS_DIR}/KissXML/KissXML.framework",
+				"${BUILT_PRODUCTS_DIR}/MBProgressHUD+DK/MBProgressHUD_DK.framework",
+				"${BUILT_PRODUCTS_DIR}/UnicodeLog/UnicodeLog.framework",
+				"${BUILT_PRODUCTS_DIR}/XMPPFramework/XMPPFramework.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AFNetworking.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ActionSheetPicker_3_0.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CocoaAsyncSocket.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CocoaLumberjack.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/KeyboardToolBar.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/KissXML.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MBProgressHUD_DK.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/UnicodeLog.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/XMPPFramework.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -559,14 +637,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B969970B1F726A740020DEBF /* AddFinshViewController.m in Sources */,
+				B969970D1F726A740020DEBF /* AddWifiViewController.m in Sources */,
+				B969970C1F726A740020DEBF /* AddFirstViewController.m in Sources */,
 				3A7757C91EAB373000FCA2BC /* ZFYAxisLine.m in Sources */,
-				3A7757691EA8E20A00FCA2BC /* UIColor+RGBValues.m in Sources */,
+				B96996FB1F6FA0F30020DEBF /* TableViewCell.m in Sources */,
 				3A7757C21EAB373000FCA2BC /* NSString+Zirkfied.m in Sources */,
 				3A7757CC1EAB373000FCA2BC /* ZFConst.m in Sources */,
 				3A7757C61EAB373000FCA2BC /* ZFLabel.m in Sources */,
 				3A7757CE1EAB373000FCA2BC /* ZFBar.m in Sources */,
 				3A77576C1EAB269D00FCA2BC /* ChartViewController.m in Sources */,
 				3A7757DC1EAB373000FCA2BC /* ZFTranslucencePath.m in Sources */,
+				B96997011F6FAB930020DEBF /* DetialViewController.m in Sources */,
 				3A7757CB1EAB373000FCA2BC /* ZFWaveAttribute.m in Sources */,
 				3A7757D41EAB373000FCA2BC /* ZFHorizontalAxis.m in Sources */,
 				3A7757DB1EAB373000FCA2BC /* ZFPieChart.m in Sources */,
@@ -578,8 +660,10 @@
 				3AC520171EA8DA180004C566 /* DevTableViewController.m in Sources */,
 				3A7757C71EAB373000FCA2BC /* ZFPopoverLabel.m in Sources */,
 				3A7757E11EAB373000FCA2BC /* ZFWaveChart.m in Sources */,
+				B96996FE1F6FA1210020DEBF /* TableViewController.m in Sources */,
 				3A7757C11EAB373000FCA2BC /* NSNumber+Zirkfied.m in Sources */,
 				3A7757DA1EAB373000FCA2BC /* ZFPie.m in Sources */,
+				B96997161F726B380020DEBF /* postToData.m in Sources */,
 				3A7757C31EAB373000FCA2BC /* UIBezierPath+Zirkfied.m in Sources */,
 				3A7757D01EAB373000FCA2BC /* ZFCirque.m in Sources */,
 				3A7757E01EAB373000FCA2BC /* ZFWave.m in Sources */,
@@ -590,6 +674,8 @@
 				3A7757D61EAB373000FCA2BC /* ZFHorizontalBarChart.m in Sources */,
 				3A7757CD1EAB373000FCA2BC /* ZFMethod.m in Sources */,
 				3A7757DF1EAB373000FCA2BC /* ZFRadarChart.m in Sources */,
+				B9F5DB271F4C2197007BD788 /* openfileRequest.m in Sources */,
+				B96997191F726D070020DEBF /* AutoViewController.m in Sources */,
 				3A7757C41EAB373000FCA2BC /* UIColor+Zirkfied.m in Sources */,
 				3A7757DD1EAB373000FCA2BC /* ZFPolygon.m in Sources */,
 				3A7757D91EAB373000FCA2BC /* ZFLineChart.m in Sources */,
@@ -597,8 +683,8 @@
 				3A7757D11EAB373000FCA2BC /* ZFCirqueChart.m in Sources */,
 				3A7757C81EAB373000FCA2BC /* ZFXAxisLine.m in Sources */,
 				3A7757C51EAB373000FCA2BC /* UIView+Zirkfied.m in Sources */,
+				B96997041F70F91A0020DEBF /* TimeViewController.m in Sources */,
 				3A7757CA1EAB373000FCA2BC /* ZFGradientAttribute.m in Sources */,
-				3A7757671EA8E20A00FCA2BC /* LDProgressView.m in Sources */,
 				3A7757D51EAB373000FCA2BC /* ZFHorizontalBar.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -610,6 +696,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				3AC520081EA765470004C566 /* Base */,
+				3A26DE6F1ED3DF4D00CCA4C1 /* zh-Hans */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -618,6 +705,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				3AC5200D1EA765470004C566 /* Base */,
+				3A26DE701ED3DF4D00CCA4C1 /* zh-Hans */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
@@ -629,6 +717,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
@@ -678,6 +767,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
@@ -726,6 +816,10 @@
 				INFOPLIST_FILE = huyubao/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/huyubao",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.kemao.huyubao;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
@@ -741,6 +835,10 @@
 				INFOPLIST_FILE = huyubao/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/huyubao",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.kemao.huyubao;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;

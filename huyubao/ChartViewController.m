@@ -8,6 +8,8 @@
 
 #import "ChartViewController.h"
 #import "AppDelegate.h"
+#import "DKProgressHUD.h"
+
 
 @interface ChartViewController ()
 
@@ -21,29 +23,59 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    [_dataSelect.layer setBorderColor:[UIColor whiteColor].CGColor];
+    [_dataSelect.layer setBorderWidth:1];
+    [_dataSelect.layer setMasksToBounds:YES];
+    [_timeStart.layer setBorderColor:[UIColor whiteColor].CGColor];
+    [_timeStart.layer setBorderWidth:1];
+    [_timeStart.layer setMasksToBounds:YES];
+    [_timeEnd.layer setBorderColor:[UIColor whiteColor].CGColor];
+    [_timeEnd.layer setBorderWidth:1];
+    [_timeEnd.layer setMasksToBounds:YES];
+    [_yesterdaySearch.layer setBorderColor:[UIColor whiteColor].CGColor];
+    [_yesterdaySearch.layer setBorderWidth:1];
+    [_yesterdaySearch.layer setMasksToBounds:YES];
+    [_yesterdaySearch setTitle:@"今天" forState:UIControlStateNormal];
+
     self.selectedDate = [NSDate date];
-    NSDateFormatter *dateformatter=[[NSDateFormatter alloc] init];
-    [dateformatter setDateFormat:@"yyyy-MM-dd"];
+    _startTime = @"";
+    _ryArr = @[@"00:00",@"01:00",@"02:00",@"03:00",@"04:00",@"05:00",@"06:00",@"07:00",@"08:00",@"09:00",@"10:00",@"11:00",@"12:00",@"13:00",@"14:00",@"15:00",@"16:00",@"17:00",@"18:00",@"19:00",@"20:00",@"21:00",@"22:00",@"23:00"];
+    _valueArr2 = [[NSMutableArray alloc]init];
+    [_valueArr2 addObjectsFromArray:_ryArr];
+    NSLog(@"%@", _valueArr2);
+//    NSDateFormatter *dateformatter=[[NSDateFormatter alloc] init];
+//    [dateformatter setDateFormat:@"yyyy-MM-dd"];
+//    NSString *date = [dateformatter stringFromDate:_selectedDate];
     
-    [self setUp];
+    [DKProgressHUD showLoading];
     
-    NSString *date = [dateformatter stringFromDate:_selectedDate];
-    NSDate *tstart = [dateformatter dateFromString:date];
-    //起始时间戳
-    NSTimeInterval interval = [tstart timeIntervalSince1970] * 1000;
-    NSString *timeStart =[NSString stringWithFormat:@"%lf\n",interval];
-    timeStart = [timeStart substringToIndex:10];
-    NSInteger endTime = [timeStart integerValue];
-    endTime = endTime+86400;
-    NSString *timeEnd = [NSString stringWithFormat:@"%ld", (long)endTime];
-    NSString *post = [NSString stringWithFormat:@"%@%@%@%@",@"Body=select,select * from huyubao where time between ",timeStart,@" and ",timeEnd];
-    NSLog(@"post:%@", post);
-//    [[AppDelegate instance]postToData:post];
+    NSString *post = [NSString stringWithFormat:@"%@",@"Body=select;SELECT AVG(data_temp) FROM huyubao WHERE DAY(time) = DAY(NOW()) AND MONTH(time) = MONTH(NOW()) AND YEAR(time) = YEAR(NOW()) GROUP BY HOUR(time)"];
+    NSLog(@"%@", post);
+    _judgeTitle = @"温度折线图";
+    [[AppDelegate instance]postToData:post postToDate:@"today"];
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(arrDoing:) name:@"today" object:nil];
+    [[NSNotificationCenter defaultCenter]removeObserver:@"today"];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+- (IBAction)setup:(id)sender {
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"参数配置" message:nil preferredStyle:UIAlertControllerStyleAlert];
+    [alert addTextFieldWithConfigurationHandler:^(UITextField *textField){
+        textField.placeholder = @"溶氧上限";
+    }];
+    [alert addTextFieldWithConfigurationHandler:^(UITextField *textField) {
+        textField.placeholder = @"溶氧下限";
+    }];
+    [alert addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+        NSLog(@"点击取消");
+    }]];
+    [alert addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        NSLog(@"点击确认");
+    }]];
+    [self presentViewController:alert animated:YES completion:nil];
 }
 
 - (IBAction)selectDate:(id)sender {
@@ -62,44 +94,103 @@
     [self.actionSheetPicker addCustomButtonWithTitle:@"Today" value:[NSDate date]];
     self.actionSheetPicker.hideCancel = YES;
     [self.actionSheetPicker showActionSheetPicker];
+    
 }
 
-- (IBAction)oneWeek:(id)sender {
-    NSDateFormatter *dateformate = [[NSDateFormatter alloc]init];
-    [dateformate setDateFormat:@"yyyy-MM-dd"];
-    NSString *date = [dateformate stringFromDate:_selectedDate];
-    NSDate *tend = [dateformate dateFromString:date];
-    NSTimeInterval interval = [tend timeIntervalSince1970] * 1000;
-    NSString *timeEnd =[NSString stringWithFormat:@"%lf\n",interval];
-    timeEnd = [timeEnd substringToIndex:10];
-    NSInteger time = [timeEnd integerValue];
-    NSInteger startTime = time-86400*6;
-    NSInteger endtime = time+86400;
-    NSString *timeStart = [NSString stringWithFormat:@"%ld", (long)startTime];
-    timeEnd = [NSString stringWithFormat:@"%ld", (long)endtime];
-    NSLog(@"%@,%@",timeStart,timeEnd);
+- (IBAction)startDate:(id)sender {
+    NSCalendar *calendar = [NSCalendar currentCalendar];
+    NSDateComponents *minimumDateComponents = [calendar components:NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear fromDate:[NSDate date]];
+    [minimumDateComponents setYear:2000];
+    NSDate *minDate = [calendar dateFromComponents:minimumDateComponents];
+    NSDate *maxDate = [NSDate date];
+    
+    
+    _actionSheetPicker = [[ActionSheetDatePicker alloc] initWithTitle:@"" datePickerMode:UIDatePickerModeDate selectedDate:self.selectedDate
+                                                          minimumDate:minDate
+                                                          maximumDate:maxDate
+                                                               target:self action:@selector(startSelected:element:) origin:sender];
+    
+    [self.actionSheetPicker addCustomButtonWithTitle:@"Today" value:[NSDate date]];
+    self.actionSheetPicker.hideCancel = YES;
+    [self.actionSheetPicker showActionSheetPicker];
+}
+
+- (IBAction)endDate:(id)sender {
+    if ([_startTime isEqualToString:@""]) {
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:nil message:@"请选择起始日期" preferredStyle:UIAlertControllerStyleAlert];
+        [alert addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+            NSLog(@"点击取消");
+        }]];
+        [self presentViewController:alert animated:YES completion:nil];
+    }else{
+        NSCalendar *calendar = [NSCalendar currentCalendar];
+        NSDateComponents *minimumDateComponents = [calendar components:NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear fromDate:[NSDate date]];
+        [minimumDateComponents setYear:2000];
+        NSDate *minDate = [calendar dateFromComponents:minimumDateComponents];
+        NSDate *maxDate = [NSDate date];
+        
+        
+        _actionSheetPicker = [[ActionSheetDatePicker alloc] initWithTitle:@"" datePickerMode:UIDatePickerModeDate selectedDate:self.selectedDate
+                                                              minimumDate:minDate
+                                                              maximumDate:maxDate
+                                                                   target:self action:@selector(endSelected:element:) origin:sender];
+        
+        [self.actionSheetPicker addCustomButtonWithTitle:@"Today" value:[NSDate date]];
+        self.actionSheetPicker.hideCancel = YES;
+        [self.actionSheetPicker showActionSheetPicker];
+    }
 }
 
 - (IBAction)yesterday:(id)sender {
-    NSDateFormatter *dateformate = [[NSDateFormatter alloc]init];
-    [dateformate setDateFormat:@"yyyy-MM-dd"];
-    NSString *date = [dateformate stringFromDate:_selectedDate];
-    NSDate *tend = [dateformate dateFromString:date];
-    NSTimeInterval interval = [tend timeIntervalSince1970] * 1000;
-    NSString *timeEnd =[NSString stringWithFormat:@"%lf\n",interval];
-    timeEnd = [timeEnd substringToIndex:10];
-    NSInteger startTime = [timeEnd integerValue];
-    startTime = startTime-86400;
-    NSString *timeStart = [NSString stringWithFormat:@"%ld", (long)startTime];
-    NSLog(@"%@,%@",timeStart,timeEnd);
+    [self showAlert:nil type:@"today"];
 }
 
-- (IBAction)checkDev:(id)sender {
+
+-(void)arrDoing:(NSNotification *)noti{
+    NSLog(@"一天数据");
+//    NSLog(@"%@", [noti.userInfo valueForKeyPath:@"dataTemp"]);
+    dispatch_async(dispatch_get_main_queue(), ^{
+        if (![noti.userInfo isEqual:@""]) {
+            NSString *str = [NSString stringWithFormat:@"%@",[noti.userInfo valueForKeyPath:@"data"]];
+            [self arrToStr:str whichType:nil];
+            if ([_valueJudge isEqualToString:@"value"]) {
+                [[NSNotificationCenter defaultCenter]postNotificationName:@"value" object:self];
+                _valueJudge = @"";
+            }
+//            NSLog(@"%@", _valueArr);
+            [self setUp];
+        }
+        [DKProgressHUD dismiss];
+    });
+}
+
+
+-(void)arrToStr:(NSString *)str whichType:(NSString *)type{
+    str = [str stringByReplacingOccurrencesOfString:@"\n" withString:@""];
+    str = [str substringFromIndex:1];
+    str = [str substringWithRange:NSMakeRange(0, [str length] - 1)];
+    str = [str stringByReplacingOccurrencesOfString:@" " withString:@""];
+    str = [str stringByReplacingOccurrencesOfString:@"\"" withString:@""];
+    
+    _tempArr = [str componentsSeparatedByString:@","];
+    _valueArr = [[NSMutableArray alloc]init];
+    [_valueArr addObjectsFromArray:_tempArr];
+    for (int i= 0; i<_valueArr.count; i++) {
+        @try {
+            _valueArr[i] = [_valueArr[i] substringToIndex:4];
+        } @catch (NSException *exception) {
+            
+        } @finally {
+            
+        }
+        
+    }
+    NSLog(@"arr:%@",_valueArr);
 }
 
 
 /**
- 初始化chart
+ 初始化温度折线图
  */
 - (void)setUp{
     if ([[UIApplication sharedApplication] statusBarOrientation] == UIInterfaceOrientationLandscapeLeft || [[UIApplication sharedApplication] statusBarOrientation] == UIInterfaceOrientationLandscapeRight){
@@ -110,11 +201,11 @@
         //首次进入控制器为竖屏时
         _height = SCREEN_HEIGHT - NAVIGATIONBAR_HEIGHT;
     }
-    self.lineChart = [[ZFLineChart alloc] initWithFrame:CGRectMake(0, 60, SCREEN_WIDTH, _height/2-20)];
+    self.lineChart = [[ZFLineChart alloc] initWithFrame:CGRectMake(0, 120, SCREEN_WIDTH, _height/3*2)];
     self.lineChart.dataSource = self;
     self.lineChart.delegate = self;
-    self.lineChart.topicLabel.text = @"温度折线图";
-    self.lineChart.unit = @"°C";
+    self.lineChart.topicLabel.text = _judgeTitle;
+    self.lineChart.unit = nil;
     self.lineChart.topicLabel.textColor = ZFBlack;
         self.lineChart.isShowXLineSeparate = YES;
     self.lineChart.isShowYLineSeparate = YES;
@@ -137,51 +228,29 @@
     [self.view addSubview:self.lineChart];
     [self.lineChart strokePath];
     
-    self.lineChart2 = [[ZFLineChart alloc] initWithFrame:CGRectMake(0, _height/2+40, SCREEN_WIDTH, _height/2-20)];
-    self.lineChart2.dataSource = self;
-    self.lineChart2.delegate = self;
-    self.lineChart2.topicLabel.text = @"溶解氧曲线图";
-    //    self.lineChart2.unit = @"人";
-    self.lineChart2.topicLabel.textColor = ZFBlack;
-    self.lineChart2.isResetAxisLineMinValue = YES;
-    //    self.lineChart2.isAnimated = NO;
-    //    self.lineChart2.valueLabelPattern = kPopoverLabelPatternBlank;
-    self.lineChart2.isShowYLineSeparate = YES;
-    self.lineChart2.isShowXLineSeparate = YES;
-//    self.lineChart2.linePatternType = kLinePatternTypeForCurve;
-    //    self.lineChart.isShowAxisLineValue = NO;
-    //    lineChart.valueCenterToCircleCenterPadding = 0;
-    self.lineChart2.isShadow = NO;
-    self.lineChart2.unitColor = ZFBlack;
-//    self.lineChart2.backgroundColor = ZFWhite;
-    self.lineChart2.xAxisColor = ZFBlack;
-    self.lineChart2.yAxisColor = ZFBlack;
-    self.lineChart2.axisLineNameColor = ZFBlack;
-    self.lineChart2.axisLineValueColor = ZFBlack;
-    self.lineChart2.xLineNameLabelToXAxisLinePadding = 0;
-    [self.view addSubview:self.lineChart2];
-    [self.lineChart2 strokePath];
 }
 
 #pragma mark - ZFGenericChartDataSource
 
 - (NSArray *)valueArrayInGenericChart:(ZFGenericChart *)chart{
-    return @[@[@"-52", @"300", @"490", @"380", @"167", @"451",@"380", @"200", @"326", @"240", @"-258", @"137",@"256", @"300", @"-89", @"430", @"256", @"256",@"256", @"300", @"-89", @"430", @"256", @"256"]
-//             @[@"380", @"200", @"326", @"240", @"-258", @"137"],
-//             @[@"256", @"300", @"-89", @"430", @"256", @"256"]
-             ];
+//    if ([_judge isEqualToString:@"oneweek"]) {
+//        _judge = @"";
+//        return @[_valueArr,_valueArr2,_valueArr3,_valueArr4,_valueArr5];
+//    }else{
+        return @[_valueArr];
+//    }
 }
 
 - (NSArray *)nameArrayInGenericChart:(ZFGenericChart *)chart{
-    return @[@"00:00",@"01:00",@"02:00",@"03:00",@"04:00",@"05:00",@"06:00",@"07:00",@"08:00",@"09:00",@"10:00",@"11:00",@"12:00",@"13:00",@"14:00",@"15:00",@"16:00",@"17:00",@"18:00",@"19:00",@"20:00",@"21:00",@"22:00",@"23:00",@"24:00"];
+    return _valueArr2;
 }
 
 - (NSArray *)colorArrayInGenericChart:(ZFGenericChart *)chart{
-    return @[ZFSkyBlue,ZFOrange,ZFMagenta];
+    return @[ZFSkyBlue,ZFOrange,ZFMagenta,ZFBlack,ZFLightGray,ZFRed,ZFGreen];
 }
 
 - (CGFloat)axisLineMaxValueInGenericChart:(ZFGenericChart *)chart{
-    return 500;
+    return 50;
 }
 
 //- (CGFloat)axisLineMinValueInGenericChart:(ZFGenericChart *)chart{
@@ -236,17 +305,135 @@
     //may have originated from textField or barButtonItem, use an IBOutlet instead of element
     [self.dataSelect setTitle:[dateformate stringFromDate:_selectedDate] forState:UIControlStateNormal];
     
-    NSString *date = [dateformate stringFromDate:_selectedDate];
-    NSDate *tstart = [dateformate dateFromString:date];
-    NSTimeInterval interval = [tstart timeIntervalSince1970] * 1000;
-    NSString *timeStart =[NSString stringWithFormat:@"%lf\n",interval];
-    timeStart = [timeStart substringToIndex:10];
-    NSInteger endTime = [timeStart integerValue];
-    endTime = endTime+86400;
-    NSString *timeEnd = [NSString stringWithFormat:@"%ld", (long)endTime];
-    NSLog(@"%@,%@",timeStart,timeEnd);
+    [self showAlert:[dateformate stringFromDate:_selectedDate] type:@"select"];
 }
 
+- (void)startSelected:(NSDate *)selectedDate element:(id)element {
+    self.selectedDate = selectedDate;
+    NSDateFormatter *dateformate = [[NSDateFormatter alloc]init];
+    [dateformate setDateFormat:@"yyyy-MM-dd"];
+    //may have originated from textField or barButtonItem, use an IBOutlet instead of element
+    [self.timeStart setTitle:[dateformate stringFromDate:_selectedDate] forState:UIControlStateNormal];
+    _startTime = [dateformate stringFromDate:_selectedDate];
+}
+
+- (void)endSelected:(NSDate *)selectedDate element:(id)element {
+    self.selectedDate = selectedDate;
+    NSDateFormatter *dateformate = [[NSDateFormatter alloc]init];
+    [dateformate setDateFormat:@"yyyy-MM-dd"];
+    //may have originated from textField or barButtonItem, use an IBOutlet instead of element
+    [self.timeEnd setTitle:[dateformate stringFromDate:_selectedDate] forState:UIControlStateNormal];
+    [self showAlert:[dateformate stringFromDate:_selectedDate] type:@"between"];
+}
+
+-(void)showAlert:(NSString *)time type:(NSString *)type{
+    _valueArr2 = [[NSMutableArray alloc]init];
+    [_valueArr2 addObjectsFromArray:_ryArr];
+    NSLog(@"%@", _valueArr2);
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:nil message:@"请选择溶氧或者温度" preferredStyle:UIAlertControllerStyleAlert];
+    [alert addAction:[UIAlertAction actionWithTitle:@"溶氧" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        if ([type isEqualToString:@"select"]) {
+            NSString *post = [NSString stringWithFormat:@"%@%@%@%@%@%@%@",@"Body=select;SELECT AVG(data_ry) FROM huyubao WHERE DAY(time) = DAY('",time,@"') AND MONTH(time) = MONTH('",time,@"') AND YEAR(time) = YEAR('",time,@"') GROUP BY HOUR(time)"];
+            NSLog(@"post:%@", post);
+            _judgeTitle = @"溶氧折线图";
+            [[AppDelegate instance]postToData:post postToDate:@"select"];
+            [[NSNotificationCenter defaultCenter ]addObserver:self selector:@selector(arrDoing:) name:@"select" object:nil];
+        }
+        if ([type isEqualToString:@"today"]) {
+            NSString *post = [NSString stringWithFormat:@"%@",@"Body=select;SELECT AVG(data_ry) FROM huyubao WHERE DAY(time) = DAY(NOW()) AND MONTH(time) = MONTH(NOW()) AND YEAR(time) = YEAR(NOW()) GROUP BY HOUR(time)"];
+            _judgeTitle = @"溶氧折线图";
+            [[AppDelegate instance]postToData:post postToDate:@"today"];
+            [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(arrDoing:) name:@"today" object:nil];
+            [[NSNotificationCenter defaultCenter]removeObserver:@"today"];
+        }
+        if ([type isEqualToString:@"between"]) {
+            NSString *post = [NSString stringWithFormat:@"%@%@%@%@%@",@"Body=select;SELECT AVG(data_ry) FROM huyubao WHERE time BETWEEN \"",_startTime,@" 00:00:00\" AND \"",time,@" 23:59:59\" GROUP BY DAY(time)"];
+            _judgeTitle = @"溶氧折线图";
+            NSLog(@"%@", post);
+            [[AppDelegate instance]postToData:post postToDate:@"week"];
+            _valueJudge = @"value";
+            [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(arrDoing:) name:@"week" object:nil];
+            [[NSNotificationCenter defaultCenter]removeObserver:@"week"];
+            [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(xValue) name:@"value" object:nil];
+            
+        }
+
+    }]];
+    [alert addAction:[UIAlertAction actionWithTitle:@"温度" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        if ([type isEqualToString:@"select"]) {
+            NSString *post = [NSString stringWithFormat:@"%@%@%@%@%@%@%@",@"Body=select;SELECT AVG(data_temp) FROM huyubao WHERE DAY(time) = DAY('",time,@"') AND MONTH(time) = MONTH('",time,@"') AND YEAR(time) = YEAR('",time,@"') GROUP BY HOUR(time)"];
+            NSLog(@"post:%@", post);
+            _judgeTitle = @"温度折线图";
+            [[AppDelegate instance]postToData:post postToDate:@"select"];
+            [[NSNotificationCenter defaultCenter ]addObserver:self selector:@selector(arrDoing:) name:@"select" object:nil];
+        }
+        if ([type isEqualToString:@"today"]) {
+            NSString *post = [NSString stringWithFormat:@"%@",@"Body=select;SELECT AVG(data_temp) FROM huyubao WHERE DAY(time) = DAY(NOW()) AND MONTH(time) = MONTH(NOW()) AND YEAR(time) = YEAR(NOW()) GROUP BY HOUR(time)"];
+            _judgeTitle = @"温度折线图";
+            [[AppDelegate instance]postToData:post postToDate:@"today"];
+            [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(arrDoing:) name:@"today" object:nil];
+            [[NSNotificationCenter defaultCenter]removeObserver:@"today"];
+        }
+        if ([type isEqualToString:@"between"]) {
+            NSString *post = [NSString stringWithFormat:@"%@%@%@%@%@",@"Body=select;SELECT AVG(data_temp) FROM huyubao WHERE time BETWEEN \"",_startTime,@" 00:00:00\" AND \"",time,@" 23:59:59\" GROUP BY DAY(time)"];
+            _judgeTitle = @"温度折线图";
+            NSLog(@"%@", post);
+            
+            [[AppDelegate instance]postToData:post postToDate:@"week"];
+            _valueJudge = @"value";
+            [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(arrDoing:) name:@"week" object:nil];
+            [[NSNotificationCenter defaultCenter]removeObserver:@"week"];
+            [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(xValue) name:@"value" object:nil];
+            [[NSNotificationCenter defaultCenter]removeObserver:@"value"];
+        }
+    }]];
+    [self presentViewController:alert animated:YES completion:nil];
+}
+
+-(void)xValue{
+    _valueArr2 = [[NSMutableArray alloc]init];
+    NSLog(@"xValue");
+    if (_valueArr.count<8) {
+        NSDateFormatter *dateformatter=[[NSDateFormatter alloc] init];
+        [dateformatter setDateFormat:@"yyyy-MM-dd"];
+        NSDate *tstart = [dateformatter dateFromString:_startTime];
+        [_valueArr2 addObject:_startTime];
+        //起始时间戳
+        NSTimeInterval interval = [tstart timeIntervalSince1970] * 1000;
+        NSString *timeStart =[NSString stringWithFormat:@"%lf\n",interval];
+        timeStart = [timeStart substringToIndex:10];
+        NSInteger endTime = [timeStart integerValue];
+        for (int i=0; i<6; i++) {
+            endTime = endTime+86400;
+            NSString *timeEnd = [NSString stringWithFormat:@"%ld", (long)endTime];
+            double time = [timeEnd doubleValue];
+            NSDate *confromTimesp = [NSDate dateWithTimeIntervalSince1970:time];
+            NSString *dateEnd = [dateformatter stringFromDate:confromTimesp];
+            [_valueArr2 addObject:dateEnd];
+//            NSLog(@"%@", _valueArr2);
+        }
+    }else{
+        NSDateFormatter *dateformatter=[[NSDateFormatter alloc] init];
+        [dateformatter setDateFormat:@"yyyy-MM-dd"];
+        NSDate *tstart = [dateformatter dateFromString:_startTime];
+        [_valueArr2 addObject:_startTime];
+        //起始时间戳
+        NSTimeInterval interval = [tstart timeIntervalSince1970] * 1000;
+        NSString *timeStart =[NSString stringWithFormat:@"%lf\n",interval];
+        timeStart = [timeStart substringToIndex:10];
+        NSInteger endTime = [timeStart integerValue];
+        for (int i=0; i<_valueArr.count; i++) {
+            endTime = endTime+86400;
+            NSString *timeEnd = [NSString stringWithFormat:@"%ld", (long)endTime];
+            double time = [timeEnd doubleValue];
+            NSDate *confromTimesp = [NSDate dateWithTimeIntervalSince1970:time];
+            NSString *dateEnd = [dateformatter stringFromDate:confromTimesp];
+            [_valueArr2 addObject:dateEnd];
+            //            NSLog(@"%@", _valueArr2);
+        }
+    }
+    [[NSNotificationCenter defaultCenter]removeObserver:@"value"];
+}
 /*
 #pragma mark - Navigation
 

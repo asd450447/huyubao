@@ -12,8 +12,7 @@ pod 'AFNetworking'
 
 pod 'ActionSheetPicker-3.0'
 
-pod 'XMPPFramework'
-
 pod 'KeyboardToolBar'
 
+pod 'XMPPFramework'
 end

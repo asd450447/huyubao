@@ -19,6 +19,15 @@
 @property (nonatomic, strong) AbstractActionSheetPicker *actionSheetPicker;
 @property (nonatomic, strong) NSDate *selectedDate;
 @property (weak, nonatomic) IBOutlet UIButton *dataSelect;
-@property NSArray *nameArr;
-@property NSArray *valueArr;
+@property NSArray *tempArr;
+@property NSArray *ryArr;
+@property NSMutableArray *valueArr;
+@property NSMutableArray *valueArr2;
+@property NSString *judgeTitle;
+@property NSString *startTime;
+@property NSString *valueJudge;
+@property (weak, nonatomic) IBOutlet UIButton *yesterdaySearch;
+@property (weak, nonatomic) IBOutlet UIButton *timeStart;
+@property (weak, nonatomic) IBOutlet UIButton *timeEnd;
+
 @end

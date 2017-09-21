@@ -14,7 +14,7 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = '157C713DEE880954F29E67727BDC55A7'
+               BlueprintIdentifier = '88CB8892988459889B535F4DB694FAAD'
                BlueprintName = 'UnicodeLog-UnicodeLog'
                ReferencedContainer = 'container:Pods.xcodeproj'
                BuildableName = 'UnicodeLog.bundle'>
